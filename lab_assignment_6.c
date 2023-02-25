@@ -1,7 +1,26 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-int search(int numbers[], int low, int high, int value) 
+int search(int numbers[], int low, int high, int value)
 {
+	if (low > high) {
+		return -1;
+	}
+	int mid;
+	while (low != high) {
+		mid = (low + high) / 2;
+
+		if (value == numbers[mid]) {
+			return mid;
+		}
+		if (value > numbers[mid]) {
+			low = mid + 1;
+		}
+		if (value < numbers[mid]) {
+			high = mid - 1;
+		}
+	}
+
 	return -1;
 }
 
@@ -28,7 +47,7 @@ int main(void)
 	FILE* inFile = fopen("input.txt","r");
 
 	fscanf(inFile, " %d\n", &numInputs);
-	
+
 	while (numInputs-- > 0)
 	{
 		fscanf(inFile, " %d\n", &countOfNums);
